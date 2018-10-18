@@ -39,8 +39,6 @@ public class ShoppingListActivity extends AppCompatActivity {
         items.add(new ShoppingItem("Potatoes",false));
         items.add(new ShoppingItem("Toilet Paper",false));
 
-        // TODO 7: adapter.notify to animate the deleted row.
-
         items_view = findViewById(R.id.items_view);
         btn_add = findViewById(R.id.btn_add);
         edit_box = findViewById(R.id.edit_box);
@@ -63,6 +61,10 @@ public class ShoppingListActivity extends AppCompatActivity {
     }
 
     public void onAddClicked(View view) {
-        //if(edit_box)
+        String edit_text = edit_box.getText().toString();
+        if(!edit_text.matches("")){
+            items.add(new ShoppingItem(edit_text,false));
+            adapter.notifyItemInserted(items.size()-1);
+        }
     }
 }
