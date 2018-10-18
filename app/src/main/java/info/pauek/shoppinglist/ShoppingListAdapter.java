@@ -13,6 +13,7 @@ public class ShoppingListAdapter extends RecyclerView.Adapter<ItemHolder> {
     Context context;
     List<ShoppingItem> items;
     private OnClickListener onClickListener;
+    // todo on longclick listener
 
     public ShoppingListAdapter(Context context, List<ShoppingItem> items) {
         this.context = context;
@@ -41,6 +42,6 @@ public class ShoppingListAdapter extends RecyclerView.Adapter<ItemHolder> {
     }
 
     public interface OnClickListener {
-        void onClick(int position);
+        void onClick(int position, boolean checked);
     }
 }
