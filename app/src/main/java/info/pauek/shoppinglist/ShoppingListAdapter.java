@@ -14,6 +14,7 @@ public class ShoppingListAdapter extends RecyclerView.Adapter<ItemHolder> {
     List<ShoppingItem> items;
     private OnClickListener onClickListener;
     // todo on longclick listener
+    private OnLongClickListener onLongClickListener;
 
     public ShoppingListAdapter(Context context, List<ShoppingItem> items) {
         this.context = context;
@@ -24,7 +25,7 @@ public class ShoppingListAdapter extends RecyclerView.Adapter<ItemHolder> {
     @Override
     public ItemHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(context).inflate(R.layout.item_view, parent, false);
-        return new ItemHolder(itemView, onClickListener);
+        return new ItemHolder(itemView, onClickListener, onLongClickListener);
     }
 
     @Override
@@ -39,6 +40,13 @@ public class ShoppingListAdapter extends RecyclerView.Adapter<ItemHolder> {
 
     public void setOnClickListener(OnClickListener listener) {
         this.onClickListener = listener;
+    }
+
+    public void setOnLongClickListener(OnLongClickListener listener) {
+        this.onLongClickListener = listener;
+    }
+    public interface OnLongClickListener {
+        void onLongClick(int position);
     }
 
     public interface OnClickListener {

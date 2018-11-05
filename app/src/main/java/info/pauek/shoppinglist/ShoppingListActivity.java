@@ -1,5 +1,7 @@
 package info.pauek.shoppinglist;
 
+import android.content.DialogInterface;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DividerItemDecoration;
@@ -60,6 +62,28 @@ public class ShoppingListActivity extends AppCompatActivity {
                 items.get(position).setChecked(!items.get(position).isChecked());
             }
         });
+
+        adapter.setOnLongClickListener(new ShoppingListAdapter.OnLongClickListener() {
+            @Override
+            public void onLongClick(int position) {
+                EraseItemIn(position);
+            }
+        });
+    }
+
+    private void EraseItemIn(final int del_pos) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Eliminar item");
+        builder.setMessage("Segur que vols esborrar l'item?");
+        builder.setPositiveButton("Esborrar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                items.remove(del_pos);
+                adapter.notifyItemRemoved(del_pos);
+            }
+        });
+        builder.setNegativeButton(android.R.string.cancel, null);
+        builder.create().show();
     }
 
     @Override
