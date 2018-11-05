@@ -57,6 +57,7 @@ public class ShoppingListActivity extends AppCompatActivity {
             public void onClick(int position, boolean checked) {
                 String msg = "Has clicat: " + items.get(position).getName();
                 Toast.makeText(ShoppingListActivity.this, msg, Toast.LENGTH_SHORT).show();
+                items.get(position).setChecked(!items.get(position).isChecked());
             }
         });
     }
@@ -73,10 +74,10 @@ public class ShoppingListActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.delete_view:
                 for (int i = 0; i < items.size(); i++){
-                    ShoppingItem current_item = items.get(i);
-                    if(current_item.isChecked()) {
+                    if (items.get(i).isChecked())
+                    {
+                        adapter.notifyItemRemoved(i);
                         items.remove(i);
-                        adapter.notifyItemRemoved(i--);
                     }
                 }
                 return super.onOptionsItemSelected(item);

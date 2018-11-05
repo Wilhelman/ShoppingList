@@ -17,6 +17,7 @@ public class ItemHolder extends RecyclerView.ViewHolder {
             public void onClick(View v) {
                 if (onClickListener != null) {
                     int pos = getAdapterPosition();
+                    name_view.setChecked(!name_view.isChecked());
                     boolean checked = name_view.isChecked();
                     onClickListener.onClick(pos, checked);
                 }
